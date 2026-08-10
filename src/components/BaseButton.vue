@@ -3,6 +3,7 @@ defineProps({
   type: { type: String, default: 'button' },
   loading: { type: Boolean, default: false },
   variant: { type: String, default: 'primary' },
+  block: { type: Boolean, default: true },
 })
 </script>
 
@@ -10,12 +11,13 @@ defineProps({
   <button
     :type="type"
     :disabled="loading"
-    class="w-full rounded-md px-4 py-2 font-medium transition disabled:cursor-not-allowed disabled:opacity-50"
-    :class="
+    class="rounded-md px-4 py-2 font-medium transition disabled:cursor-not-allowed disabled:opacity-50"
+    :class="[
+      block ? 'w-full' : 'w-auto',
       variant === 'primary'
         ? 'bg-accent text-paper hover:bg-accent-hover'
-        : 'border border-line bg-white text-ink hover:bg-paper'
-    "
+        : 'border border-line bg-white text-ink hover:bg-paper',
+    ]"
   >
     <slot />
   </button>
