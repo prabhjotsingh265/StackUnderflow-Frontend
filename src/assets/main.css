@@ -27,3 +27,7 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
 }
+
+button:not(:disabled) {
+  cursor: pointer;
+}

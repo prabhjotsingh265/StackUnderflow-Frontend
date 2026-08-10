@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
 import { getTags } from '@/api/tags'
 
 const tags = ref([])
@@ -14,9 +15,14 @@ onMounted(async () => {
   <div class="rounded-lg border border-line bg-white p-5">
     <h2 class="mb-3 font-serif text-base font-semibold text-ink">Tags</h2>
     <div class="flex flex-wrap gap-2">
-      <span v-for="tag in tags" :key="tag.id" class="rounded bg-paper px-2 py-1 text-xs text-ink-muted">
+      <RouterLink
+        v-for="tag in tags"
+        :key="tag.id"
+        :to="{ name: 'questions', query: { tag: tag.slug } }"
+        class="rounded bg-paper px-2 py-1 text-xs text-ink-muted hover:bg-accent/10 hover:text-accent"
+      >
         {{ tag.name }}
-      </span>
+      </RouterLink>
     </div>
   </div>
 </template>

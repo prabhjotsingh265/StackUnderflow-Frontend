@@ -11,7 +11,7 @@ defineEmits(['change'])
     <button
       :disabled="meta.current_page <= 1"
       @click="$emit('change', meta.current_page - 1)"
-      class="rounded-md border border-line px-3 py-1.5 hover:bg-paper disabled:cursor-not-allowed disabled:opacity-40"
+      class="rounded-md border border-line px-4 py-2 hover:bg-paper disabled:cursor-not-allowed disabled:opacity-40"
     >
       Previous
     </button>
@@ -21,7 +21,7 @@ defineEmits(['change'])
     <button
       :disabled="meta.current_page >= meta.last_page"
       @click="$emit('change', meta.current_page + 1)"
-      class="rounded-md border border-line px-3 py-1.5 hover:bg-paper disabled:cursor-not-allowed disabled:opacity-40"
+      class="rounded-md border border-line px-4 py-2 hover:bg-paper disabled:cursor-not-allowed disabled:opacity-40"
     >
       Next
     </button>

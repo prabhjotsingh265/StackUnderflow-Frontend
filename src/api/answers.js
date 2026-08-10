@@ -12,3 +12,10 @@ export function acceptAnswer(answerId) {
   return client.post(`/answers/${answerId}/accept`)
 }
 
+export function updateAnswer(questionSlug, answerId, body) {
+  return client.patch(`/questions/${questionSlug}/answers/${answerId}`, { body })
+}
+
+export function deleteAnswer(questionSlug, answerId) {
+  return client.delete(`/questions/${questionSlug}/answers/${answerId}`)
+}

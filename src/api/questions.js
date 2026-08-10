@@ -1,7 +1,7 @@
 import client from './client'
 
-export function getQuestions(page = 1) {
-  return client.get('/questions', { params: { page } })
+export function getQuestions({ page = 1, tag, search } = {}) {
+  return client.get('/questions', { params: { page, tag, search } })
 }
 
 export function getQuestion(slug) {
