@@ -14,10 +14,11 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/questions/:id/edit',
+    path: '/questions/:slug/edit',
     name: 'questions.edit',
     component: () => import('@/views/EditQuestionView.vue'),
     meta: { requiresAuth: true },
+    props: true,
   },
   {
     path: '/questions/:slug',
