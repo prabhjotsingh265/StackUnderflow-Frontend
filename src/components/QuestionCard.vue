@@ -47,7 +47,9 @@ defineProps({
             {{ tag.name }}
           </span>
         </div>
-        <div class="text-xs text-ink-muted">{{ question.user?.name }} asked {{ question.created_at }}</div>
+        <div class="text-xs text-ink-muted">
+          {{ question.user?.name }} ({{ question.user?.reputation ?? 0 }} rep) asked {{ question.created_at }}
+        </div>
       </div>
     </div>
   </div>

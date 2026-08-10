@@ -17,7 +17,7 @@ async function handleLogout() {
 
 <template>
   <nav class="border-b border-line bg-white">
-    <PageContainer class="flex items-center justify-between py-4">
+    <PageContainer class="flex flex-wrap items-center justify-between gap-y-2 py-4">
       <div class="flex items-center gap-6">
         <RouterLink :to="{ name: 'questions' }" class="flex items-center gap-2 text-accent">
           <LogoIcon class="h-7 w-7" />
@@ -37,14 +37,17 @@ async function handleLogout() {
 
       <div class="flex items-center gap-4 text-sm">
         <template v-if="authStore.isAuthenticated">
-          <span class="text-ink-muted">{{ authStore.user?.name }}</span>
+          <span class="text-ink-muted">
+            {{ authStore.user?.name }}
+            <span class="text-xs">({{ authStore.user?.reputation ?? 0 }} rep)</span>
+          </span>
           <button @click="handleLogout" class="text-ink-muted hover:text-ink">Log out</button>
         </template>
         <template v-else>
           <RouterLink :to="{ name: 'login' }" class="text-ink-muted hover:text-ink">Log in</RouterLink>
           <RouterLink
             :to="{ name: 'register' }"
-            class="rounded-md bg-accent px-3 py-1.5 text-paper hover:bg-accent-hover"
+            class="rounded-md bg-accent px-4 py-2 text-paper hover:bg-accent-hover"
           >
             Register
           </RouterLink>

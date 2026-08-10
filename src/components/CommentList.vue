@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
-import { createComment } from '@/api/comments'
+import { createComment, deleteComment } from '@/api/comments'
 import { useAuthStore } from '@/stores/auth'
 
 const props = defineProps({
@@ -11,7 +11,7 @@ const props = defineProps({
   id: { type: Number, required: true },
 })
 
-const emit = defineEmits(['added'])
+const emit = defineEmits(['added', 'deleted'])
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -48,12 +48,32 @@ async function submitComment() {
     isSubmitting.value = false
   }
 }
+
+async function handleDelete(comment) {
+  if (!confirm('Delete this comment?')) return
+
+  try {
+    await deleteComment(comment.id)
+    emit('deleted', comment.id)
+  } catch {
+    toast.error('Could not delete comment.')
+  }
+}
 </script>
 
 <template>
   <div class="mt-4 space-y-2 border-t border-line pt-3 text-sm">
-    <div v-for="comment in comments" :key="comment.id" class="text-ink-muted">
-      {{ comment.body }} — <span class="font-medium">{{ comment.user?.name }}</span>
+    <div v-for="comment in comments" :key="comment.id" class="flex items-start justify-between gap-2 text-ink-muted">
+      <span>{{ comment.body }} — <span class="font-medium">{{ comment.user?.name }}</span></span>
+      <button
+        v-if="authStore.user?.id === comment.user?.id"
+        type="button"
+        class="shrink-0 text-ink-muted hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        :aria-label="`Delete comment by ${comment.user?.name}`"
+        @click="handleDelete(comment)"
+      >
+        ✕
+      </button>
     </div>
 
     <form v-if="isAdding" @submit.prevent="submitComment" class="flex gap-2">

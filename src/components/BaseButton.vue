@@ -11,7 +11,7 @@ defineProps({
   <button
     :type="type"
     :disabled="loading"
-    class="rounded-md px-4 py-2 font-medium transition disabled:cursor-not-allowed disabled:opacity-50"
+    class="rounded-md px-4 py-2 font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:cursor-not-allowed disabled:opacity-50"
     :class="[
       block ? 'w-full' : 'w-auto',
       variant === 'primary'

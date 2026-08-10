@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
 import { toast } from 'vue3-toastify'
 import { useAuthStore } from '@/stores/auth'
+import { getErrorMessage } from '@/utils/formErrors'
 import AuthCard from '@/components/AuthCard.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -36,7 +37,7 @@ async function handleSubmit() {
     if (error.response?.status === 422) {
       errors.value = error.response.data.errors
     } else {
-      toast.error('Something went wrong. Please try again.')
+      toast.error(getErrorMessage(error))
     }
   } finally {
     isSubmitting.value = false

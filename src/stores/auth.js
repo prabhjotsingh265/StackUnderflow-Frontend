@@ -35,6 +35,10 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout() {
     try {
       await authApi.logout()
+    } catch {
+      // Log the user out locally regardless — a failed network request
+      // to revoke the server-side token shouldn't trap them in a state
+      // where the UI still thinks they're logged in.
     } finally {
       clearAuth()
     }

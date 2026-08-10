@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
 import { toast } from 'vue3-toastify'
 import { useAuthStore } from '@/stores/auth'
+import { getErrorMessage } from '@/utils/formErrors'
 import AuthCard from '@/components/AuthCard.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -17,6 +18,8 @@ const isSubmitting = ref(false)
 
 async function handleSubmit() {
   if (isSubmitting.value) return
+
+  isSubmitting.value = true
   errors.value = {}
 
   try {
@@ -27,7 +30,7 @@ async function handleSubmit() {
     if (error.response?.status === 422) {
       errors.value = error.response.data.errors
     } else {
-      toast.error('Something went wrong. Please try again.')
+      toast.error(getErrorMessage(error))
     }
   } finally {
     isSubmitting.value = false
@@ -46,7 +49,13 @@ async function handleSubmit() {
       </BaseButton>
     </form>
 
-    <p class="mt-6 text-center text-sm text-ink-muted">
+    <p class="mt-4 text-center text-sm text-ink-muted">
+      <RouterLink :to="{ name: 'forgot-password' }" class="font-medium text-accent hover:underline"
+        >Forgot your password?</RouterLink
+      >
+    </p>
+
+    <p class="mt-2 text-center text-sm text-ink-muted">
       Don't have an account?
       <RouterLink :to="{ name: 'register' }" class="font-medium text-accent hover:underline"
         >Register</RouterLink
