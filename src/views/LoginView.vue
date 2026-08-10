@@ -16,7 +16,7 @@ const errors = ref({})
 const isSubmitting = ref(false)
 
 async function handleSubmit() {
-  isSubmitting.value = true
+  if (isSubmitting.value) return
   errors.value = {}
 
   try {

@@ -18,6 +18,8 @@ const errors = ref({})
 const isSubmitting = ref(false)
 
 async function handleSubmit() {
+  if (isSubmitting.value) return
+  
   isSubmitting.value = true
   errors.value = {}
 
