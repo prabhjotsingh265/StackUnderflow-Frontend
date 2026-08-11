@@ -1,8 +1,23 @@
 # StackUnderflow — Frontend
 
-A Stack Overflow–style Q&A platform, rebuilt from scratch as a modern Vue 3 single-page application. This is the public-facing client — browsing, asking, answering, voting, and everything else a visitor does — consuming a separate Laravel API.
+![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Pinia](https://img.shields.io/badge/State-Pinia-FFD859?logo=pinia&logoColor=black)
+![Tailwind](https://img.shields.io/badge/CSS-Tailwind_4-06B6D4?logo=tailwindcss&logoColor=white)
+![Vitest](https://img.shields.io/badge/Tested_with-Vitest-6E9F18?logo=vitest&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-This project is a portfolio rebuild of an older Laravel 6 + Vue 2 (Options API) application, redone with a modern stack and proper architecture: Vue 3 Composition API, Pinia for state, and a component-driven design system, rather than a line-by-line port of the legacy code.
+A Stack Overflow–style Q&A platform — the public-facing client where visitors browse, ask, answer, vote, and build reputation. A Vue 3 single-page application consuming a separate Laravel API.
+
+<div align="center">
+
+### [![Live Demo](https://img.shields.io/badge/🚀_LIVE_DEMO-View_the_App-7A2E3A?style=for-the-badge)](https://stackunderflow-prabhjot.vercel.app/)
+
+**https://stackunderflow-prabhjot.vercel.app**
+
+</div>
+
+---
 
 ## Tech stack
 
@@ -35,7 +50,7 @@ This project is a portfolio rebuild of an older Laravel 6 + Vue 2 (Options API) 
 ### Prerequisites
 
 - Node.js 22.18+ or 24.12+ (see `engines` in `package.json`)
-- The companion [`stackunderflow-backend`](../stackunderflow-backend) Laravel API running locally (this app is only the client — it has no backend of its own)
+- The companion [`stackunderflow-backend`](https://github.com/prabhjotsingh265/StackUnderflow-Backend) Laravel API running locally (this app is only the client — it has no backend of its own)
 
 ### Setup
 
@@ -97,3 +112,11 @@ src/
 - **Design system**: a small set of Tailwind theme tokens (`--color-paper`, `--color-ink`, `--color-accent`, etc.) defined once in `assets/main.css`, plus a handful of reusable base components (`BaseButton`, `BaseInput`, `PageContainer`), rather than one-off utility classes scattered per page.
 - **Filtering/search**: the questions list uses the URL's query string (`?tag=`, `?search=`, `?page=`) as the source of truth, driven by a `watch` on the route rather than local component state — so filtered views are bookmarkable and back-button-friendly.
 - **Testing**: unit/component tests focus on logic that's easy to get subtly wrong (store state transitions, the vote-toggle composable, ownership-gated UI) rather than chasing full coverage.
+
+## Deployment
+
+Deployed on Vercel, built from `main` on every push. The only required environment variable is `VITE_API_BASE_URL`, pointed at the live backend.
+
+## License
+
+MIT
